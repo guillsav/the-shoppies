@@ -4,11 +4,12 @@ import { MoviesContext } from '../context/movies/MoviesContext';
 import Search from '../components/search/Search';
 import MoviesList from '../components/moviesList/MoviesList';
 import NominatedList from '../components/nominatedList/NominatedList';
+import Pagination from '../components/pagination/Pagination';
 
 const Home = () => {
   const moviesContext = useContext(MoviesContext);
 
-  const { fetchMovies, searchError } = moviesContext;
+  const { fetchMovies, searchError, totalResults } = moviesContext;
   const onSubmit = () => {
     fetchMovies(values.search);
   };
@@ -26,6 +27,7 @@ const Home = () => {
         <MoviesList />
         <NominatedList />
       </div>
+      {totalResults > 10 && <Pagination />}
     </div>
   );
 };

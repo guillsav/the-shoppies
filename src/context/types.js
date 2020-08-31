@@ -1,3 +1,4 @@
+// Movies types
 export const MOVIES_ERROR = 'MOVIES_ERROR';
 export const SEARCH_ERROR = 'SEARCH_ERROR';
 export const SET_TERM_SUCCESS = 'SET_TERM_SUCCESS';

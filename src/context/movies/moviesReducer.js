@@ -1,3 +1,7 @@
+/**
+ * This reducer handles the state logic based on the dispatched actions.
+ */
+
 import {
   MOVIES_ERROR,
   SEARCH_ERROR,

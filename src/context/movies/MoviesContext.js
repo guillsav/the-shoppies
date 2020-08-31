@@ -21,6 +21,17 @@ import {
 
 export const MoviesContext = createContext();
 
+/*
+This context handles the global state related to movies and the actions that relates to it.
+===========================================================================================
+Actions
+  - fetchMovies: Fires when the user submit a term in the search input.
+  - addToNominated: Fires when the user want to nominate a movie and adds the movie to the nominated list.
+  - removeFromNominated:Fires when the user want to remove a nomination from a movie, and removes the movie from the nominated list.
+  - fetchNextPage: Fires when the user click the next button on the pagination component, it shows the next 10 movies if it exists.
+  - fetchPrevPage: Fires when the user click the previous button on the pagination component, it shows the previous 10 movies if it exists.
+*/
+
 export const MoviesState = ({ children }) => {
   const localMovies = JSON.parse(localStorage.getItem('nominated'));
 
@@ -51,7 +62,7 @@ export const MoviesState = ({ children }) => {
     localStorage.setItem('nominated', JSON.stringify(state.nominated));
   }, [state]);
 
-  // Check if any movies returned from the search, is already in nominated array.
+  // Checks if any movies returned from the search, is already in nominated array.
   const checkIfNominated = list => {
     // Keeps track of movie IDs in nominated.
     const imdbIDs = state.nominated.map(movie => movie.imdbID);
@@ -67,7 +78,7 @@ export const MoviesState = ({ children }) => {
     return list;
   };
 
-  // Handle fetching of movies based on search query.
+  // Handles fetching of movies based on search query.
   const fetchMovies = async search => {
     try {
       // Handles if user doesn't type any movie title.
@@ -96,7 +107,7 @@ export const MoviesState = ({ children }) => {
         await dispatch({
           type: SEARCH_ERROR,
           payload:
-            'Enter a different title to get different result, or click next to see more!',
+            'Enter a different title to get a different result, or click next to see more!',
         });
         return;
       }
@@ -105,12 +116,12 @@ export const MoviesState = ({ children }) => {
     }
   };
 
-  // Handle fetching of movies on the next page based on search and the page query parametes.
+  // Handles fetching of movies on the next page based on search and the page query parametes.
   const fetchNextPage = async () => {
     try {
       await dispatch({ type: FETCH_NEXT_PAGE_START });
 
-      const page = state.currentPage++;
+      const page = state.currentPage + 1;
 
       const { data } = await axios().get(`?s=${state.term}&page=${page}`);
 
@@ -124,7 +135,7 @@ export const MoviesState = ({ children }) => {
     }
   };
 
-  // Handle fetching of movies on the previous page based on search and the page query parametes.
+  // Handles fetching of movies on the previous page based on search and the page query parametes.
   const fetchPrevPage = async () => {
     try {
       await dispatch({ type: FETCH_PREVIOUS_PAGE_START });
@@ -132,7 +143,7 @@ export const MoviesState = ({ children }) => {
       let page;
 
       if (state.currentPage > 1) {
-        page = state.currentPage--;
+        page = state.currentPage - 1;
       } else {
         page = 1;
       }
