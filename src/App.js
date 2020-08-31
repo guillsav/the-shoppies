@@ -1,12 +1,16 @@
 import React from 'react';
-import Header from './components/global/header/Header';
-import './App.css';
+import { BrowserRouter as Router } from 'react-router-dom';
+
+import { MoviesState } from './context/movies/MoviesContext';
+import AppRoutes from './AppRoutes';
 
 function App() {
   return (
-    <div className="App">
-      <Header text="App" />
-    </div>
+    <Router>
+      <MoviesState>
+        <AppRoutes />
+      </MoviesState>
+    </Router>
   );
 }
 

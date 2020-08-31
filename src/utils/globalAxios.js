@@ -5,6 +5,7 @@ export default () => {
     headers: {
       'content-type': 'application/json',
     },
+    baseURL: process.env.REACT_APP_API_URL,
     params: {
       apikey: process.env.REACT_APP_OMDB_API_KEY,
     },
