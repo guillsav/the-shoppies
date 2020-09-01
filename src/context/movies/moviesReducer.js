@@ -57,7 +57,7 @@ export default (state, action) => {
     case ADD_TO_NOMINATED_SUCCESS:
       return {
         ...state,
-        nominated: [...state.nominated, action.payload],
+        nominated: [...state.nominated, action.payload.movie],
         totalNominated: state.totalNominated + 1,
         isLoading: false,
         error: null,

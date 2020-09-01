@@ -82,11 +82,13 @@ export const MoviesState = ({ children }) => {
   const fetchMovies = async () => {
     try {
       await dispatch({ type: FETCH_MOVIES_START });
-      const { data } = await axios().get(`?s=${state.term}&page=1`);
+      const { data } = await axios().get(
+        `?s=${state.term}&page=${state.currentPage}`
+      );
 
       const result = checkIfNominated(data);
 
-      result.page = 1;
+      result.page = state.currentPage ? state.currentPage : 1;
 
       await dispatch({ type: FETCH_MOVIES_SUCCESS, payload: result });
     } catch ({ message }) {
@@ -159,7 +161,11 @@ export const MoviesState = ({ children }) => {
     if (state.nominated.length < 5 && state.totalNominated < 5) {
       // Sets boolean flag isNominated on movie to true.
       movie[0].isNominated = true;
-      await dispatch({ type: ADD_TO_NOMINATED_SUCCESS, payload: movie[0] });
+
+      await dispatch({
+        type: ADD_TO_NOMINATED_SUCCESS,
+        payload: { movie: movie[0] },
+      });
     } else {
       // Handles maximum movie in nominated error message.
       await dispatch({
