@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import { MoviesContext } from '../../context/movies/MoviesContext';
 
 import Movie from '../movie/Movie';
@@ -22,7 +23,7 @@ const MoviesList = () => {
       <ResultHeading>
         <ResultContent>
           <ListHeader
-            text={`Result for ${term.length > 0 ? `"${term}"` : ''}`}
+            text={`Results for ${term.length > 0 ? `"${term}"` : ''}`}
           />
           <p>Select by clicking on movie image.</p>
           {nominated.length === 5 && error && <Error text={error} />}
@@ -31,18 +32,22 @@ const MoviesList = () => {
           <Pagination />
         </ResultPagination>
       </ResultHeading>
-      <ResultList>
+      <TransitionGroup
+        component={ResultList}
+        transitionEnterTimeout={500}
+        transitionLeaveTimeout={300}>
         {movies &&
           movies.map(movie => {
             return (
-              <Movie
+              <CSSTransition
                 key={movie.imdbID}
-                movie={movie}
-                addToNominated={addToNominated}
-              />
+                timeout={300}
+                classNames="display">
+                <Movie movie={movie} addToNominated={addToNominated} />
+              </CSSTransition>
             );
           })}
-      </ResultList>
+      </TransitionGroup>
     </ResultContainer>
   );
 };

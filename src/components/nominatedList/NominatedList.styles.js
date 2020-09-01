@@ -33,4 +33,23 @@ export const SelectedList = styled.div`
   grid-template-columns: repeat(5, 1fr);
   grid-gap: 2rem;
   margin-bottom: 3rem;
+  transition: all 200ms ease-in-out;
+
+  .display-enter {
+    opacity: 0.01;
+  }
+
+  .display-enter-active {
+    opacity: 1;
+    transition: all 200ms ease-in-out;
+  }
+
+  .display-leave {
+    opacity: 1;
+  }
+
+  .display-leave-active {
+    opacity: 0.01;
+    transition: all 200ms ease-in-out;
+  }
 `;

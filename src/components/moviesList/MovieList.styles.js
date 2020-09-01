@@ -43,4 +43,23 @@ export const ResultList = styled.div`
   grid-template-columns: repeat(5, 1fr);
   grid-template-rows: repeat(2, 1fr);
   grid-gap: 2rem;
+  overflow: hidden;
+
+  .display-enter {
+    opacity: 0.01;
+  }
+
+  .display-enter-active {
+    opacity: 1;
+    transition: all 200ms ease-in-out;
+  }
+
+  .display-leave {
+    opacity: 1;
+  }
+
+  .display-leave-active {
+    opacity: 0.01;
+    transition: all 200ms ease-in-out;
+  }
 `;

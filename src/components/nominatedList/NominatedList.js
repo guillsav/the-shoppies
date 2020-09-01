@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import { MoviesContext } from '../../context/movies/MoviesContext';
+import { TransitionGroup, CSSTransition } from 'react-transition-group';
 
 import NominatedHeader from '../global/header/Header';
 import SelectedMovie from '../selectedMovie/SelectedMovie';
@@ -17,23 +18,27 @@ const NominatedList = () => {
     <NominatedContainer>
       <NominatedHeading>
         <NominatedHeader text="Nominations" />
-        {nominated.length > 0 && <p>Remove by clicking on movie image.</p>}
+        <p>Remove by clicking on movie image.</p>
         {nominated.length === 5 && error && (
           <ErrorB text={`${error} (To add a different movie remove one)`} />
         )}
       </NominatedHeading>
-      <SelectedList>
+      <TransitionGroup component={SelectedList}>
         {nominated &&
           nominated.map(movie => {
             return (
-              <SelectedMovie
+              <CSSTransition
                 key={movie.imdbID}
-                movie={movie}
-                removeFromNominated={removeFromNominated}
-              />
+                classNames="display"
+                timeout={200}>
+                <SelectedMovie
+                  movie={movie}
+                  removeFromNominated={removeFromNominated}
+                />
+              </CSSTransition>
             );
           })}
-      </SelectedList>
+      </TransitionGroup>
     </NominatedContainer>
   );
 };
