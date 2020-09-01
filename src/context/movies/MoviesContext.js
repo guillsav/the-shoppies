@@ -40,13 +40,11 @@ export const MoviesState = ({ children }) => {
     nominated: localMovies ? localMovies : [],
     movies: [],
     term: '',
-    movie: null,
     currentPage: null,
     totalResults: null,
     totalNominated: 0,
     isLoading: false,
     error: null,
-    searchError: null,
   };
 
   const [state, dispatch] = useReducer(
@@ -198,12 +196,10 @@ export const MoviesState = ({ children }) => {
         nominated: state.nominated,
         movies: state.movies,
         term: state.term,
-        movie: state.movie,
         currentPage: state.currentPage,
         totalResults: state.totalResults,
         isLoading: state.isLoading,
         error: state.error,
-        searchError: state.searchError,
         setTerm,
         fetchMovies,
         fetchNextPage,

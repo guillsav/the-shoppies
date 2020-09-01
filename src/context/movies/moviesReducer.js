@@ -29,7 +29,6 @@ export default (state, action) => {
         ...state,
         isLoading: true,
         error: null,
-        searchError: null,
       };
     case SET_TERM_SUCCESS:
       return {

@@ -3,9 +3,6 @@ import styled, { css } from 'styled-components';
 const nominatedStyle = css`
   opacity: 0.2;
   cursor: initial;
-  &:hover {
-    transform: none;
-  }
 `;
 
 const getContainerStyle = props => {
@@ -30,12 +27,23 @@ export const MovieContainer = styled.div`
     color: #fff;
   }
 
-  &:hover {
+  /* &:hover {
     transform: scale(1.1);
-  }
+  } */
 
   ${getContainerStyle}
 `;
+
+const posterSelectedStyle = css`
+  &:hover {
+    transform: none;
+  }
+`;
+
+const getPosterStyle = props => {
+  if (props.selected) return posterSelectedStyle;
+};
+
 export const MoviePoster = styled.img`
   width: 100%;
   height: 24.2rem;
@@ -43,4 +51,10 @@ export const MoviePoster = styled.img`
   border-radius: 0.2rem;
   margin-bottom: 1rem;
   box-shadow: 0 2px 4px 0px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease-in-out;
+  &:hover {
+    transform: scale(1.1);
+  }
+
+  ${getPosterStyle}
 `;
