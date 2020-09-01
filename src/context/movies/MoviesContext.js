@@ -121,7 +121,7 @@ export const MoviesState = ({ children }) => {
     } catch ({ message }) {
       await dispatch({ type: MOVIES_ERROR, payload: message });
     }
-  }, [checkIfNominated, state.currentPage]);
+  }, [checkIfNominated, state.currentPage, state.term]);
 
   // Handles fetching of movies on the next page based on search and the page query parametes.
   const fetchNextPage = async () => {
