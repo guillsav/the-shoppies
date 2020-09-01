@@ -28,8 +28,8 @@ import {
 This context handles the global state related to movies and the actions that relates to it.
 ===========================================================================================
 Actions
+- fetchOnLoad: Fires when the page loads.
   - fetchMovies: Fires when the user types a term in the search input.
-  - fetchOnLoad: Fires when the page loads.
   - addToNominated: Fires when the user want to nominate a movie and adds the movie to the nominated list.
   - removeFromNominated:Fires when the user want to remove a nomination from a movie, and removes the movie from the nominated list.
   - fetchNextPage: Fires when the user click the next button on the pagination component, it shows the next 10 movies if it exists.
