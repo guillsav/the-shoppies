@@ -1,0 +1,11 @@
+.app {
+  max-width: 960px;
+  margin: 0 auto;
+  margin-top: 3rem;
+  font-size: 1.6rem;
+}
+
+.off {
+  opacity: 0.08;
+  cursor: initial !important;
+}

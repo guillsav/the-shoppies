@@ -4,7 +4,7 @@
 
 import {
   MOVIES_ERROR,
-  SEARCH_ERROR,
+  CLEAR_MOVIES,
   SET_TERM_SUCCESS,
   FETCH_MOVIES_START,
   FETCH_MOVIES_SUCCESS,
@@ -59,7 +59,7 @@ export default (state, action) => {
       return {
         ...state,
         nominated: [...state.nominated, action.payload],
-        totalNominated: state.totalNominated++,
+        totalNominated: state.totalNominated + 1,
         isLoading: false,
         error: null,
       };
@@ -75,19 +75,19 @@ export default (state, action) => {
           }
           return movie;
         }),
-        totalNominated: state.totalNominated--,
+        totalNominated: state.totalNominated - 1,
         isLoading: false,
         error: null,
+      };
+    case CLEAR_MOVIES:
+      return {
+        ...state,
+        movies: [],
       };
     case MOVIES_ERROR:
       return {
         ...state,
         error: action.payload,
-      };
-    case SEARCH_ERROR:
-      return {
-        ...state,
-        searchError: action.payload,
       };
     default:
       return state;

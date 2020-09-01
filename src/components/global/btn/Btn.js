@@ -1,10 +1,12 @@
 import React from 'react';
 
+import { NominateBtn } from './Btn.styles';
+
 const Btn = ({ type, text, ...buttonProps }) => {
   return (
-    <button {...buttonProps} type={type}>
+    <NominateBtn {...buttonProps} type={type}>
       {text}
-    </button>
+    </NominateBtn>
   );
 };
 

@@ -5,7 +5,7 @@ import axios from '../../utils/globalAxios';
 
 import {
   MOVIES_ERROR,
-  SEARCH_ERROR,
+  CLEAR_MOVIES,
   SET_TERM_SUCCESS,
   FETCH_MOVIES_START,
   FETCH_MOVIES_SUCCESS,
@@ -19,18 +19,18 @@ import {
   REMOVE_FROM_NOMINATED_SUCCESS,
 } from '../types';
 
-export const MoviesContext = createContext();
-
 /*
 This context handles the global state related to movies and the actions that relates to it.
 ===========================================================================================
 Actions
-  - fetchMovies: Fires when the user submit a term in the search input.
+  - fetchMovies: Fires when the user types a term in the search input.
   - addToNominated: Fires when the user want to nominate a movie and adds the movie to the nominated list.
   - removeFromNominated:Fires when the user want to remove a nomination from a movie, and removes the movie from the nominated list.
   - fetchNextPage: Fires when the user click the next button on the pagination component, it shows the next 10 movies if it exists.
   - fetchPrevPage: Fires when the user click the previous button on the pagination component, it shows the previous 10 movies if it exists.
 */
+
+export const MoviesContext = createContext();
 
 export const MoviesState = ({ children }) => {
   const localMovies = JSON.parse(localStorage.getItem('nominated'));
@@ -57,11 +57,6 @@ export const MoviesState = ({ children }) => {
     initialState
   );
 
-  useEffect(() => {
-    // Persists and keeps track of the nominated movies in the state via local storage.
-    localStorage.setItem('nominated', JSON.stringify(state.nominated));
-  }, [state]);
-
   // Checks if any movies returned from the search, is already in nominated array.
   const checkIfNominated = list => {
     // Keeps track of movie IDs in nominated.
@@ -78,39 +73,24 @@ export const MoviesState = ({ children }) => {
     return list;
   };
 
+  // Sets the term in state
+  const setTerm = searchTerm =>
+    dispatch({
+      type: SET_TERM_SUCCESS,
+      payload: searchTerm,
+    });
+
   // Handles fetching of movies based on search query.
-  const fetchMovies = async search => {
+  const fetchMovies = async () => {
     try {
-      // Handles if user doesn't type any movie title.
-      if (!search && state.term === '') {
-        await dispatch({
-          type: SEARCH_ERROR,
-          payload: 'You must enter a movie title!',
-        });
-        return;
-      }
+      await dispatch({ type: FETCH_MOVIES_START });
+      const { data } = await axios().get(`?s=${state.term}&page=1`);
 
-      await dispatch({
-        type: SET_TERM_SUCCESS,
-        payload: search ? search : state.term,
-      });
+      const result = checkIfNominated(data);
 
-      if (search) {
-        await dispatch({ type: FETCH_MOVIES_START });
-        const { data } = await axios().get(`?s=${search}&page=1`);
-        const result = checkIfNominated(data);
+      result.page = 1;
 
-        result.page = 1;
-
-        await dispatch({ type: FETCH_MOVIES_SUCCESS, payload: result });
-      } else {
-        await dispatch({
-          type: SEARCH_ERROR,
-          payload:
-            'Enter a different title to get a different result, or click next to see more!',
-        });
-        return;
-      }
+      await dispatch({ type: FETCH_MOVIES_SUCCESS, payload: result });
     } catch ({ message }) {
       await dispatch({ type: MOVIES_ERROR, paylaod: message });
     }
@@ -166,7 +146,6 @@ export const MoviesState = ({ children }) => {
 
     // Filter out the selected movie based on ID.
     const movie = state.movies.filter(movie => movie.imdbID === id);
-
     // Keeps track of movie IDs in nominated.
     const imdbIDs = state.nominated.map(movie => movie.imdbID);
 
@@ -179,7 +158,7 @@ export const MoviesState = ({ children }) => {
     }
 
     // Makes sure that users can only nominate 5 movies.
-    if (state.totalNominated < 5) {
+    if (state.nominated.length < 5 && state.totalNominated < 5) {
       // Sets boolean flag isNominated on movie to true.
       movie[0].isNominated = true;
       await dispatch({ type: ADD_TO_NOMINATED_SUCCESS, payload: movie[0] });
@@ -187,7 +166,8 @@ export const MoviesState = ({ children }) => {
       // Handles maximum movie in nominated error message.
       await dispatch({
         type: MOVIES_ERROR,
-        payload: 'You have reached the number of movies to nominate!',
+        payload:
+          'You have reached the maximum number of movies you can nominate.',
       });
     }
   };
@@ -195,13 +175,22 @@ export const MoviesState = ({ children }) => {
   // Removes movies from the nominated array in the state.
   const removeFromNominated = async id => {
     await dispatch({ type: REMOVE_FROM_NOMINATED_START });
-
     try {
       await dispatch({ type: REMOVE_FROM_NOMINATED_SUCCESS, payload: id });
     } catch (err) {
       await dispatch({ type: MOVIES_ERROR, payload: 'Movie not found' });
     }
   };
+
+  useEffect(() => {
+    fetchMovies(state.term);
+    if (state.term === '' && state.movies.length > 0) {
+      dispatch({ type: CLEAR_MOVIES });
+    }
+    // Persists and keeps track of the nominated movies in the state via local storage.
+    localStorage.setItem('nominated', JSON.stringify(state.nominated));
+    // eslint-disable-next-line
+  }, [state.nominated, state.term]);
 
   return (
     <MoviesContext.Provider
@@ -215,6 +204,7 @@ export const MoviesState = ({ children }) => {
         isLoading: state.isLoading,
         error: state.error,
         searchError: state.searchError,
+        setTerm,
         fetchMovies,
         fetchNextPage,
         fetchPrevPage,

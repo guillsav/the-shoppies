@@ -10,15 +10,14 @@
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "3.4.3"
+    "react-scripts": "3.4.3",
+    "styled-components": "^5.1.1"
   },
   "scripts": {
-    "start": "yarn run watch:css && react-scripts start",
-    "build": "yarn run build:css && react-scripts build",
+    "start": "react-scripts start",
+    "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "build:css": "postcss src/assets/tailwind.css -o src/assets/main.css",
-    "watch:css": "postcss src/assets/tailwind.css -o src/assets/main.css"
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -36,9 +35,6 @@
     ]
   },
   "devDependencies": {
-    "autoprefixer": "^9.8.6",
-    "postcss-cli": "^7.1.1",
-    "tailwindcss": "^1.7.5",
     "use-reducer-logger": "^1.0.2"
   }
 }

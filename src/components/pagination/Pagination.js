@@ -1,18 +1,34 @@
 import React, { useContext } from 'react';
 import { MoviesContext } from '../../context/movies/MoviesContext';
 
-import Prev from '../global/btn/Btn';
-import Next from '../global/btn/Btn';
+import { ReactComponent as Prev } from '../../images/arrow-circle-left.svg';
+import { ReactComponent as Next } from '../../images/arrow-circle-right.svg';
+import { PaginationContainer } from './Pagination.styles';
 
 const Pagination = () => {
   const movieContext = useContext(MoviesContext);
-  const { fetchNextPage, fetchPrevPage, currentPage } = movieContext;
+  const {
+    fetchNextPage,
+    fetchPrevPage,
+    currentPage,
+    totalResults,
+  } = movieContext;
+  const totalPages = Math.floor(totalResults / 10);
   return (
-    <div className="flex flex-row">
-      <Prev text="Prev" onClick={() => fetchPrevPage()} />
-      <span>{currentPage}</span>
-      <Next text="Next" onClick={() => fetchNextPage()} />
-    </div>
+    <PaginationContainer>
+      <Prev
+        text="Prev"
+        onClick={() => fetchPrevPage()}
+        style={{ cursor: 'pointer', outline: 'none' }}
+        className={currentPage === 1 ? 'off' : null}
+      />
+      <Next
+        text="Next"
+        onClick={() => fetchNextPage()}
+        style={{ cursor: 'pointer', outline: 'none' }}
+        className={currentPage === totalPages ? 'off' : null}
+      />
+    </PaginationContainer>
   );
 };
 

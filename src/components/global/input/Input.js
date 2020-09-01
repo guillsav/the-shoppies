@@ -1,8 +1,10 @@
 import React from 'react';
 
+import { GlobalInput } from './Input.styles';
+
 const Input = ({ type, name, id, placeholder, onChange, ...inputProps }) => {
   return (
-    <input
+    <GlobalInput
       {...inputProps}
       type={type}
       name={name || null}
