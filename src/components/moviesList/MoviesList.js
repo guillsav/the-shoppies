@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useRef } from 'react';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import { MoviesContext } from '../../context/movies/MoviesContext';
 
@@ -17,6 +17,8 @@ import {
 const MoviesList = () => {
   const moviesContext = useContext(MoviesContext);
   const { movies, addToNominated, error, nominated, term } = moviesContext;
+
+  const nodeRef = useRef(null);
 
   return (
     <ResultContainer>
@@ -42,7 +44,8 @@ const MoviesList = () => {
               <CSSTransition
                 key={movie.imdbID}
                 timeout={300}
-                classNames="display">
+                classNames="display"
+                nodeRef={nodeRef}>
                 <Movie movie={movie} addToNominated={addToNominated} />
               </CSSTransition>
             );

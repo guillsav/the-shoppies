@@ -1,4 +1,9 @@
-import React, { createContext, useReducer, useEffect } from 'react';
+import React, {
+  createContext,
+  useReducer,
+  useEffect,
+  useCallback,
+} from 'react';
 import logger from 'use-reducer-logger';
 import moviesReducer from './moviesReducer';
 import axios from '../../utils/globalAxios';
@@ -56,20 +61,23 @@ export const MoviesState = ({ children }) => {
   );
 
   // Checks if any movies returned from the search, is already in nominated array.
-  const checkIfNominated = list => {
-    // Keeps track of movie IDs in nominated.
-    const imdbIDs = state.nominated.map(movie => movie.imdbID);
+  const checkIfNominated = useCallback(
+    list => {
+      // Keeps track of movie IDs in nominated.
+      const imdbIDs = state.nominated.map(movie => movie.imdbID);
 
-    list.Search.map(movie => {
-      if (imdbIDs.includes(movie.imdbID)) {
-        movie.isNominated = true;
-      } else {
-        movie.isNominated = false;
-      }
-      return movie;
-    });
-    return list;
-  };
+      list.Search.map(movie => {
+        if (imdbIDs.includes(movie.imdbID)) {
+          movie.isNominated = true;
+        } else {
+          movie.isNominated = false;
+        }
+        return movie;
+      });
+      return list;
+    },
+    [state.nominated]
+  );
 
   // Sets the term in state
   const setTerm = searchTerm =>
@@ -92,16 +100,33 @@ export const MoviesState = ({ children }) => {
 
       await dispatch({ type: FETCH_MOVIES_SUCCESS, payload: result });
     } catch ({ message }) {
-      await dispatch({ type: MOVIES_ERROR, paylaod: message });
+      await dispatch({ type: MOVIES_ERROR, payload: message });
     }
   };
+
+  const fetchOnLoad = useCallback(async () => {
+    const classic = 'Star Wars';
+    setTerm(classic);
+
+    try {
+      const { data } = await axios().get(
+        `?s=${state.term}&page=${state.currentPage}`
+      );
+
+      const result = await checkIfNominated(data);
+
+      await dispatch({ type: FETCH_MOVIES_SUCCESS, payload: result });
+    } catch ({ message }) {
+      await dispatch({ type: MOVIES_ERROR, payload: message });
+    }
+  }, [checkIfNominated, state.currentPage]);
 
   // Handles fetching of movies on the next page based on search and the page query parametes.
   const fetchNextPage = async () => {
     try {
       await dispatch({ type: FETCH_NEXT_PAGE_START });
 
-      const page = state.currentPage + 1;
+      const page = state.currentPage ? state.currentPage + 1 : 1;
 
       const { data } = await axios().get(`?s=${state.term}&page=${page}`);
 
@@ -187,6 +212,10 @@ export const MoviesState = ({ children }) => {
   };
 
   useEffect(() => {
+    if (state.term === '' && state.movies.length === 0) {
+      fetchOnLoad();
+    }
+
     fetchMovies(state.term);
     if (state.term === '' && state.movies.length > 0) {
       dispatch({ type: CLEAR_MOVIES });
