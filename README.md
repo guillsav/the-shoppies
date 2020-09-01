@@ -9,6 +9,10 @@ The shoppies is an application where users can search for movies based on their 
 3. Start the web server using the `yarn start` local command. The app will be served at http://localhost:3000/
 4. Go to http://localhost:3000/ in your browser and start searching for movies.
 
+## Live Project
+
+https://the-shoppies-awards.netlify.app/
+
 ## How to nominate movies
 
 1. Click on the movie poster of the movie you want to nominate.
