@@ -25,15 +25,15 @@ import {
 } from '../types';
 
 /*
-This context handles the global state related to movies and the actions that relates to it.
+This context handles the state management.
 ===========================================================================================
 Actions
-- fetchOnLoad: Fires when the page loads.
+  - fetchOnLoad: Fires when the page loads.
   - fetchMovies: Fires when the user types a term in the search input.
-  - addToNominated: Fires when the user want to nominate a movie and adds the movie to the nominated list.
-  - removeFromNominated:Fires when the user want to remove a nomination from a movie, and removes the movie from the nominated list.
-  - fetchNextPage: Fires when the user click the next button on the pagination component, it shows the next 10 movies if it exists.
-  - fetchPrevPage: Fires when the user click the previous button on the pagination component, it shows the previous 10 movies if it exists.
+  - addToNominated: Fires when the user wants to nominate a movie and adds the movie to the nominated list.
+  - removeFromNominated: Fires when the user wants to remove a movie from the nominations.
+  - fetchNextPage: Fires when the user clicks the next button on the pagination component. It shows the next 10 movies, if they exist.
+  - fetchPrevPage: Fires when the user clicks the previous button on the pagination component. It shows the previous 10 movies, if they exist.
 */
 
 export const MoviesContext = createContext();
@@ -42,7 +42,7 @@ export const MoviesState = ({ children }) => {
   const localMovies = JSON.parse(localStorage.getItem('nominated'));
 
   const initialState = {
-    // If movies are stored in localStorage add movies to state.
+    // If movies are stored in localStorage, load movies to state.
     nominated: localMovies ? localMovies : [],
     movies: [],
     term: '',
@@ -54,17 +54,17 @@ export const MoviesState = ({ children }) => {
   };
 
   const [state, dispatch] = useReducer(
-    // Displays a log of the dispatched actions in development, for debugging purposes.
+    // Displays a log of the dispatched actions in development mode, for debugging purposes.
     process.env.NODE_ENV === 'development'
       ? logger(moviesReducer)
       : moviesReducer,
     initialState
   );
 
-  // Checks if any movies returned from the search, is already in nominated array.
+  // Checks if any movies returned from the search are already in nominated list.
   const checkIfNominated = useCallback(
     list => {
-      // Keeps track of movie IDs in nominated.
+      // Keeps track of movie IDs in nominated list.
       const imdbIDs = state.nominated.map(movie => movie.imdbID);
 
       list.Search.map(movie => {
@@ -80,7 +80,7 @@ export const MoviesState = ({ children }) => {
     [state.nominated]
   );
 
-  // Sets the term in state
+  // Sets the term in state.
   const setTerm = searchTerm =>
     dispatch({
       type: SET_TERM_SUCCESS,
@@ -105,7 +105,7 @@ export const MoviesState = ({ children }) => {
     }
   };
 
-  // Handles fetching movies when the page loads.
+  // Handles fetching of movies when the page loads.
   const fetchOnLoad = useCallback(async () => {
     const classic = 'Star Wars';
     setTerm(classic);
@@ -123,7 +123,7 @@ export const MoviesState = ({ children }) => {
     }
   }, [checkIfNominated, state.currentPage, state.term]);
 
-  // Handles fetching of movies on the next page based on search and the page query parametes.
+  // Handles fetching of movies on the next page based on search and page query parameters.
   const fetchNextPage = async () => {
     try {
       await dispatch({ type: FETCH_NEXT_PAGE_START });
@@ -142,7 +142,7 @@ export const MoviesState = ({ children }) => {
     }
   };
 
-  // Handles fetching of movies on the previous page based on search and the page query parametes.
+  // Handles fetching of movies on the previous page based on search and page query parameters.
   const fetchPrevPage = async () => {
     try {
       await dispatch({ type: FETCH_PREVIOUS_PAGE_START });
@@ -167,13 +167,13 @@ export const MoviesState = ({ children }) => {
     }
   };
 
-  // Adds movies to the nominated array in the state.
+  // Adds movies to the nominated list in the state.
   const addToNominated = async id => {
     await dispatch({ type: ADD_TO_NOMINATED_START });
 
-    // Filter out the selected movie based on ID.
+    // Filters out the selected movie, based on ID.
     const movie = state.movies.filter(movie => movie.imdbID === id);
-    // Keeps track of movie IDs in nominated.
+    // Keeps track of movie IDs in nominated list.
     const imdbIDs = state.nominated.map(movie => movie.imdbID);
 
     if (imdbIDs.includes(movie[0].imdbID) || movie[0].isNominated === true) {
@@ -194,7 +194,7 @@ export const MoviesState = ({ children }) => {
         payload: { movie: movie[0] },
       });
     } else {
-      // Handles maximum movie in nominated error message.
+      // Dispatches an error if the maximum number of movies is reached in the nominated list.
       await dispatch({
         type: MOVIES_ERROR,
         payload:
@@ -203,7 +203,7 @@ export const MoviesState = ({ children }) => {
     }
   };
 
-  // Removes movies from the nominated array in the state.
+  // Removes movies from the nominated list in the state.
   const removeFromNominated = async id => {
     await dispatch({ type: REMOVE_FROM_NOMINATED_START });
     try {
