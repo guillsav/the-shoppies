@@ -33,7 +33,7 @@ https://the-shoppies-awards.netlify.app/
 ## Features
 
 - State management with context API.
-- Fetch movies from the OMDBAPI.
+- Fetch movies from the OMDB API.
 - Store selected movies in localStorage.
 
 ## Dependencies
