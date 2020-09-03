@@ -13,7 +13,7 @@ import { SectionHeader, SectionContent, LogoContainer } from './Home.styles';
 const Home = () => {
   const moviesContext = useContext(MoviesContext);
 
-  const { fetchMovies, searchError, movies } = moviesContext;
+  const { fetchMovies, searchError, movies, nominated, term } = moviesContext;
   const onSubmit = () => {
     fetchMovies(values.search);
   };
@@ -35,7 +35,18 @@ const Home = () => {
         />
       </SectionHeader>
       <SectionContent id="content">
-        {movies.length > 0 ? <MoviesList /> : <h3>Start movies search... </h3>}
+        {movies.length > 0 && <MoviesList />}
+        {movies &&
+          movies.length === 0 &&
+          nominated &&
+          nominated.length === 0 &&
+          term === '' && <h3>Start Looking for the movies you like... </h3>}
+        {movies &&
+          movies.length === 0 &&
+          nominated &&
+          nominated.length > 0 &&
+          nominated.length < 5 &&
+          term === '' && <h3>Looking for more movies you like... </h3>}
         <NominatedList />
       </SectionContent>
     </div>

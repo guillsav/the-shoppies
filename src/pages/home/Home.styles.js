@@ -25,6 +25,7 @@ export const SectionContent = styled.section`
     font-size: 2.8rem;
     font-weight: 700;
     color: #333;
+    margin-top: 8rem;
     margin-bottom: 3rem;
     text-transform: uppercase;
   }
