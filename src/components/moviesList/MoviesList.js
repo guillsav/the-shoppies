@@ -27,7 +27,7 @@ const MoviesList = () => {
           <ListHeader
             text={`Results for ${term.length > 0 ? `"${term}"` : ''}`}
           />
-          <p>Select by clicking on movie image.</p>
+          <p>Choose up to 5 movies (Select by clicking on the poster)</p>
           {nominated.length === 5 &&
             error &&
             Array.isArray(error) &&

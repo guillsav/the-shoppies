@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const NominatedContainer = styled.div`
   width: 100%;
-  height: 55.5rem;
+  height: 57.8rem;
   background: #15161a;
   border-radius: 0.2rem;
   padding: 6rem;
@@ -18,6 +18,18 @@ export const NominatedHeading = styled.div`
   justify-content: space-between;
   align-items: flex-start;
   margin-bottom: 3rem;
+
+  p {
+    font-size: 1.2rem;
+    color: #fff;
+    opacity: 0.26;
+    margin-bottom: 0.5rem;
+  }
+`;
+
+export const NominatedContent = styled.div`
+  width: 45rem;
+  height: 5.8rem;
 
   p {
     font-size: 1.2rem;

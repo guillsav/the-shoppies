@@ -25,7 +25,7 @@ export const ResultHeading = styled.div`
 
 export const ResultContent = styled.div`
   width: 45rem;
-  height: 6.5rem;
+  height: 5.8rem;
 
   p {
     font-size: 1.2rem;

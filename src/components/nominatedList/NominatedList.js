@@ -8,6 +8,7 @@ import ErrorB from '../global/error/Error';
 import {
   NominatedContainer,
   NominatedHeading,
+  NominatedContent,
   SelectedList,
 } from './NominatedList.styles';
 
@@ -17,12 +18,14 @@ const NominatedList = () => {
   return (
     <NominatedContainer>
       <NominatedHeading>
-        <NominatedHeader text="Nominations" />
-        <p>Remove by clicking on movie image.</p>
-        {nominated.length === 5 &&
-          error &&
-          Array.isArray(error) &&
-          error.length > 0 && <ErrorB warning text={error[1]} />}
+        <NominatedContent>
+          <NominatedHeader text="Nominations" />
+          <p>Remove by clicking on the poster</p>
+          {nominated.length === 5 &&
+            error &&
+            Array.isArray(error) &&
+            error.length > 0 && <ErrorB warning text={error[1]} />}
+        </NominatedContent>
       </NominatedHeading>
       <TransitionGroup component={SelectedList}>
         {nominated &&
