@@ -46,7 +46,7 @@ const Home = () => {
           nominated &&
           nominated.length > 0 &&
           nominated.length < 5 &&
-          term === '' && <h3>Looking for more movies you like... </h3>}
+          term === '' && <h3>Look for more movies you like... </h3>}
         <NominatedList />
       </SectionContent>
     </div>
