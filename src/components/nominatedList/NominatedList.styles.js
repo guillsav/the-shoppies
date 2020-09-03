@@ -33,13 +33,13 @@ export const NominatedHeading = styled.div`
   justify-content: space-between;
   align-items: flex-start;
   margin-bottom: 3rem;
-
+  /*
   p {
     font-size: 1.2rem;
     color: #fff;
     opacity: 0.26;
     margin-bottom: 0.5rem;
-  }
+  } */
 `;
 
 export const NominatedContent = styled.div`

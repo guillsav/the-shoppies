@@ -26,6 +26,7 @@ export const SelectedMovieContainer = styled.div`
   @media (max-width: 868px) {
     width: 12rem;
     height: 17.7rem;
+    margin-top: 3rem;
     margin-bottom: 8rem !important;
   }
 
