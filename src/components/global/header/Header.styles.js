@@ -3,6 +3,10 @@ import styled, { css } from 'styled-components';
 const jumbo = css`
   font-size: 2.2rem;
   font-weight: 900;
+
+  @media (max-width: 868px) {
+    margin-top: 1rem;
+  }
 `;
 
 const regular = css`

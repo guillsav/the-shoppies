@@ -28,7 +28,10 @@ const MoviesList = () => {
             text={`Results for ${term.length > 0 ? `"${term}"` : ''}`}
           />
           <p>Select by clicking on movie image.</p>
-          {nominated.length === 5 && error && <Error text={error} />}
+          {nominated.length === 5 &&
+            error &&
+            Array.isArray(error) &&
+            error.length > 0 && <Error text={error[0]} />}
         </ResultContent>
         <ResultPagination>
           <Pagination />

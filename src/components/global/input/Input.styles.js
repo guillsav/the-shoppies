@@ -11,6 +11,10 @@ export const GlobalInput = styled.input`
   outline: none;
   margin-left: 1rem;
 
+  @media (max-width: 768px) {
+    width: 20rem;
+  }
+
   &::-webkit-autofill &:-webkit-autofill:hover,
   &:-webkit-autofill:focus,
   &:-webkit-autofill:active {

@@ -1,7 +1,6 @@
 // Movies types
 export const MOVIES_ERROR = 'MOVIES_ERROR';
 export const CLEAR_MOVIES = 'CLEAR_MOVIES';
-export const SEARCH_ERROR = 'SEARCH_ERROR';
 export const SET_TERM_SUCCESS = 'SET_TERM_SUCCESS';
 export const FETCH_MOVIES_START = 'FETCH_MOVIES_START';
 export const FETCH_MOVIES_SUCCESS = 'FETCH_MOVIES_SUCCESS';

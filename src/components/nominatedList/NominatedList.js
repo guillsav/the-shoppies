@@ -19,9 +19,10 @@ const NominatedList = () => {
       <NominatedHeading>
         <NominatedHeader text="Nominations" />
         <p>Remove by clicking on movie image.</p>
-        {nominated.length === 5 && error && (
-          <ErrorB text={`${error} (To add a different movie remove one)`} />
-        )}
+        {nominated.length === 5 &&
+          error &&
+          Array.isArray(error) &&
+          error.length > 0 && <ErrorB warning text={error[1]} />}
       </NominatedHeading>
       <TransitionGroup component={SelectedList}>
         {nominated &&

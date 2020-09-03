@@ -2,13 +2,17 @@ import styled from 'styled-components';
 
 export const ResultContainer = styled.div`
   width: 100%;
-  height: 78.3rem;
+  height: 96.8rem;
   background: #15161a;
   border-radius: 0.2rem;
-  padding: 3rem;
+  padding: 6rem;
   display: flex;
   flex-direction: column;
   margin-bottom: 6rem;
+
+  @media (max-width: 868px) {
+    height: 116rem;
+  }
 `;
 
 export const ResultHeading = styled.div`
@@ -42,7 +46,7 @@ export const ResultList = styled.div`
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   grid-template-rows: repeat(2, 1fr);
-  grid-gap: 2rem;
+  grid-gap: 3rem;
   overflow: hidden;
 
   .display-enter {
@@ -62,4 +66,16 @@ export const ResultList = styled.div`
     opacity: 0.01;
     transition: all 200ms ease-in-out;
   }
+
+  @media (max-width: 868px) {
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    grid-gap: 1rem;
+  }
+
+  @media (max-width: 593px) {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    grid-gap: 2rem;
+  } ;
 `;

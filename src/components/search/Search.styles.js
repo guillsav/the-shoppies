@@ -8,4 +8,9 @@ export const InputContainer = styled.div`
   display: flex;
   justify-content: flex-start;
   align-content: baseline;
+
+  @media (max-width: 768px) {
+    width: 25rem;
+    justify-content: center;
+  }
 `;

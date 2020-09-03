@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const NominatedContainer = styled.div`
   width: 100%;
-  height: 44.1rem;
+  height: 52.5rem;
   background: #15161a;
   border-radius: 0.2rem;
   padding: 3rem;

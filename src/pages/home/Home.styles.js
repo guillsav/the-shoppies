@@ -7,6 +7,11 @@ export const SectionHeader = styled.section`
   justify-content: space-between;
   align-items: center;
   margin-bottom: 6rem;
+
+  @media (max-width: 650px) {
+    flex-direction: column;
+    margin-bottom: 12rem;
+  }
 `;
 
 export const SectionContent = styled.section`
@@ -31,4 +36,11 @@ export const LogoContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  @media (max-width: 650px) {
+    height: 8rem;
+    flex-direction: column;
+
+    margin-bottom: 3rem;
+  }
 `;

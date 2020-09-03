@@ -195,15 +195,19 @@ export const MoviesState = ({ children }) => {
       });
     } else {
       // Dispatches an error if the maximum number of movies is reached in the nominated list.
+      const err = [
+        'You have reached the maximum number of movies you can nominate',
+        'You can add a different movie by removing one',
+      ];
+
       await dispatch({
         type: MOVIES_ERROR,
-        payload:
-          'You have reached the maximum number of movies you can nominate.',
+        payload: err,
       });
     }
   };
 
-  // Removes movies from the nominated list in the state.
+  // Removes movies from the nominated array in the state.
   const removeFromNominated = async id => {
     await dispatch({ type: REMOVE_FROM_NOMINATED_START });
     try {

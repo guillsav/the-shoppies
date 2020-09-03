@@ -1,9 +1,25 @@
 .app {
-  max-width: 960px;
+  max-width: 1280px;
   margin: 0 auto;
-  margin-top: 3rem;
+  margin-top: 6rem;
   font-size: 1.6rem;
 }
+
+@media (max-width: 980px) {
+  .app {
+    padding-top: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
+/*
+@media (max-width: 320px) {
+  .app {
+    padding-top: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+} */
 
 .off {
   opacity: 0.08;

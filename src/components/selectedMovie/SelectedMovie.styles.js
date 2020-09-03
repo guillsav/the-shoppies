@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
 export const SelectedMovieContainer = styled.div`
-  width: 16.4rem;
-  height: 28.2rem;
+  width: 20.8rem;
+  height: 30.1rem;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -20,9 +20,9 @@ export const SelectedMovieContainer = styled.div`
 `;
 export const SelectedMoviePoster = styled.img`
   width: 100%;
-  height: 24.2rem;
+  height: 100%;
   background: cover;
-  border-radius: 0.2rem;
+  border-radius: 0.4rem;
   margin-bottom: 1rem;
   box-shadow: 0 2px 4px 0px rgba(0, 0, 0, 0.3);
 `;
