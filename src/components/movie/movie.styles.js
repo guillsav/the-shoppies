@@ -31,8 +31,22 @@ export const MovieContainer = styled.div`
     transform: scale(1.1);
   } */
 
+  @media (max-width: 1124px) {
+    width: 15.2rem;
+    height: 22.4rem;
+  }
+
   @media (max-width: 868px) {
-    width: 15.8rem;
+    width: 12rem;
+    height: 17.7rem;
+    margin-bottom: 8rem !important;
+  }
+
+  @media (max-width: 420px) {
+    width: 11.9rem;
+    height: 17.6rem;
+    margin-bottom: 8rem !important;
+    margin: 0 auto;
   }
 
   ${getContainerStyle}

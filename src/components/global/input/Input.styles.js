@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const GlobalInput = styled.input`
   width: 37rem;
-  height: 1.8rem;
+  height: 2.2rem;
   border: 0;
   background-color: transparent;
   color: #fff;
@@ -11,8 +11,12 @@ export const GlobalInput = styled.input`
   outline: none;
   margin-left: 1rem;
 
-  @media (max-width: 768px) {
-    width: 20rem;
+  @media (max-width: 868px) {
+    width: 24.9rem;
+  }
+
+  @media (max-width: 420px) {
+    width: 100%;
   }
 
   &::-webkit-autofill &:-webkit-autofill:hover,

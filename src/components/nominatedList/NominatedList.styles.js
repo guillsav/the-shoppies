@@ -9,6 +9,21 @@ export const NominatedContainer = styled.div`
   display: flex;
   flex-direction: column;
   margin-bottom: 6rem;
+
+  @media (max-width: 1124px) {
+    height: 48.5rem;
+  }
+
+  @media (max-width: 868px) {
+    height: 40rem;
+    padding: 3rem;
+  }
+
+  @media (max-width: 420px) {
+    /* height: auto; */
+    height: 92rem;
+    padding: 1.5rem;
+  }
 `;
 
 export const NominatedHeading = styled.div`
@@ -63,5 +78,23 @@ export const SelectedList = styled.div`
   .display-leave-active {
     opacity: 0.01;
     transition: all 200ms ease-in-out;
+  }
+
+  @media (max-width: 1124px) {
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    grid-gap: 2.1rem;
+  }
+
+  @media (max-width: 868px) {
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    grid-gap: 1.7rem;
+  }
+
+  @media (max-width: 420px) {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    grid-gap: 2rem;
   }
 `;

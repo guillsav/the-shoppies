@@ -8,9 +8,10 @@ export const SectionHeader = styled.section`
   align-items: center;
   margin-bottom: 6rem;
 
-  @media (max-width: 650px) {
+  @media (max-width: 420px) {
+    height: 9.4rem;
     flex-direction: column;
-    margin-bottom: 12rem;
+    margin-bottom: 3rem;
   }
 `;
 
@@ -38,10 +39,9 @@ export const LogoContainer = styled.div`
   justify-content: space-between;
   align-items: center;
 
-  @media (max-width: 650px) {
-    height: 8rem;
-    flex-direction: column;
-
+  @media (max-width: 420px) {
+    width: 228px;
+    justify-content: flex-start;
     margin-bottom: 3rem;
   }
 `;

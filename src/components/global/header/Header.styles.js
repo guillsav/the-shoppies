@@ -4,8 +4,8 @@ const jumbo = css`
   font-size: 2.2rem;
   font-weight: 900;
 
-  @media (max-width: 868px) {
-    margin-top: 1rem;
+  @media (max-width: 420px) {
+    margin-left: 1rem;
   }
 `;
 
@@ -20,6 +20,10 @@ const movieTitle = css`
   font-weight: 700;
   text-align: center;
   line-height: 1.5;
+
+  @media (max-width: 868px) {
+    font-size: 1rem;
+  }
 `;
 
 const getHeaderStyle = props => {
