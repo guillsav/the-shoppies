@@ -33,7 +33,8 @@ export default (state, action) => {
     case SET_TERM_SUCCESS:
       return {
         ...state,
-        term: action.payload,
+        term: action.payload.searchTerm,
+        currentPage: action.payload.page,
       };
     case FETCH_MOVIES_SUCCESS:
       return {

@@ -81,11 +81,13 @@ export const MoviesState = ({ children }) => {
   );
 
   // Sets the term in state.
-  const setTerm = searchTerm =>
+  const setTerm = searchTerm => {
+    const payload = { searchTerm, page: 1 };
     dispatch({
       type: SET_TERM_SUCCESS,
-      payload: searchTerm,
+      payload: payload,
     });
+  };
 
   // Handles fetching of movies based on search query.
   const fetchMovies = async () => {
