@@ -220,7 +220,11 @@ export const MoviesState = ({ children }) => {
   };
 
   useEffect(() => {
-    if (state.term === '' && state.movies.length === 0) {
+    if (
+      state.term === '' &&
+      state.movies.length === 0 &&
+      state.nominated.length === 0
+    ) {
       fetchOnLoad();
     }
 
