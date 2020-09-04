@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import SelectedMovieHeader from '../global/header/Header';
 import {
@@ -16,6 +17,11 @@ const SelectedMovie = ({ movie, removeFromNominated }) => {
       </div>
     </SelectedMovieContainer>
   );
+};
+
+SelectedMovie.propTypes = {
+  movie: PropTypes.object.isRequired,
+  removeFromNominated: PropTypes.func.isRequired,
 };
 
 export default SelectedMovie;

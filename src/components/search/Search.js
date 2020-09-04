@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import Input from '../global/input/Input';
 import { InputContainer } from './Search.styles';
@@ -18,6 +19,11 @@ const Search = ({ handleChange, handleSubmit }) => {
       </InputContainer>
     </form>
   );
+};
+
+Search.propTypes = {
+  handleChange: PropTypes.func.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
 };
 
 export default Search;

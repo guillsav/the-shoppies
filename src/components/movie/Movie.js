@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import MovieHeader from '../global/header/Header';
 import { MovieContainer, MoviePoster } from './movie.styles';
@@ -18,6 +19,11 @@ const Movie = ({ movie, addToNominated }) => {
       </div>
     </MovieContainer>
   );
+};
+
+Movie.propTypes = {
+  movie: PropTypes.object.isRequired,
+  addToNominated: PropTypes.func.isRequired,
 };
 
 export default Movie;
