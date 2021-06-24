@@ -9,7 +9,7 @@ import {
   NominatedContainer,
   NominatedHeading,
   NominatedContent,
-  SelectedList,
+  SelectedList
 } from './NominatedList.styles';
 
 const NominatedList = () => {
@@ -19,7 +19,7 @@ const NominatedList = () => {
     <NominatedContainer>
       <NominatedHeading>
         <NominatedContent>
-          <NominatedHeader text="Nominations" />
+          <NominatedHeader text="Favorites" />
           <p>Remove by clicking on the poster</p>
           {nominated.length === 5 &&
             error &&

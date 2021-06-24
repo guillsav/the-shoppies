@@ -1,6 +1,7 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 export const SelectedMovieContainer = styled.div`
+  position: relative;
   width: 20.8rem;
   height: 30.1rem;
   display: flex;
@@ -42,4 +43,34 @@ export const SelectedMoviePoster = styled.img`
   border-radius: 0.4rem;
   margin-bottom: 1rem;
   box-shadow: 0 2px 4px 0px rgba(0, 0, 0, 0.3);
+`;
+
+const hidden = css`
+  display: none;
+`;
+
+const visible = css`
+  display: flex;
+`;
+
+const getDisplayStyle = props => {
+  return props.hidden ? hidden : visible;
+};
+
+export const ActionMSG = styled.p`
+  width: 100%;
+  height: 15%;
+  color: #000;
+  font-weight: bold;
+  position: absolute;
+  bottom: 0;
+  background: #ff0000;
+  opacity: 90%;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0 0 0.4rem 0.4rem;
+  transition: all 0.6s ease-in-out;
+
+  ${getDisplayStyle}
 `;

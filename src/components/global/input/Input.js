@@ -3,13 +3,12 @@ import PropTypes from 'prop-types';
 
 import { GlobalInput } from './Input.styles';
 
-const Input = ({ type, name, id, placeholder, onChange, ...inputProps }) => {
+const Input = ({ type, name, placeholder, onChange, ...inputProps }) => {
   return (
     <GlobalInput
       {...inputProps}
       type={type}
       name={name || null}
-      id={id || null}
       onChange={onChange}
       placeholder={placeholder}
     />
@@ -19,9 +18,8 @@ const Input = ({ type, name, id, placeholder, onChange, ...inputProps }) => {
 Input.propTypes = {
   type: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
-  id: PropTypes.string.isRequired,
   placeholder: PropTypes.string.isRequired,
-  onChange: PropTypes.func.isRequired,
+  onChange: PropTypes.func.isRequired
 };
 
 export default Input;
